@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "description": "Retrieval priors for recurring natural-language gaps between player questions and official MTG rules. These entries boost official evidence retrieval only; they must not contain final answers.",
+  "priors": [
+    {
+      "id": "counter_target_spell",
+      "pattern": "\\bcounter target spell\\b",
+      "rule_sections": ["701"],
+      "forced_rule_refs": [],
+      "reason": "Player wording often names the counter action while the rules store it under keyword actions."
+    },
+    {
+      "id": "cant_be_countered",
+      "pattern": "\\bcan['\u2019]t be countered\\b",
+      "rule_sections": ["101", "701"],
+      "forced_rule_refs": ["101.2", "701.6a", "701.5a"],
+      "reason": "Questions about uncounterable spells usually need both can't-beats-can and countering rules."
+    },
+    {
+      "id": "uncounterable",
+      "pattern": "\\buncounterable\\b",
+      "rule_sections": ["101", "701"],
+      "forced_rule_refs": ["101.2", "701.6a", "701.5a"],
+      "reason": "Common player shorthand for spells that can't be countered."
+    },
+    {
+      "id": "permission_vs_prohibition",
+      "pattern": "\\b(can['\u2019]?t|cannot|can not|prohibit(?:ed|s)?)\\b.*\\b(may|allowed|can)\\b|\\b(may|allowed|can)\\b.*\\b(can['\u2019]?t|cannot|can not|prohibit(?:ed|s)?)\\b",
+      "rule_sections": ["101"],
+      "forced_rule_refs": ["101.2"],
+      "reason": "Player questions often ask whether a permission can override a prohibition."
+    },
+    {
+      "id": "static_ability",
+      "pattern": "\\bstatic abilit(?:y|ies)\\b",
+      "rule_sections": ["604"],
+      "forced_rule_refs": ["604.1"],
+      "reason": "Static abilities are a broad rule category and are often asked using exact terminology."
+    },
+    {
+      "id": "activated_ability_definition",
+      "pattern": "\\bactivated abilit(?:y|ies)\\b|\\brecognize\\b.*\\bability\\b|\\bcost\\s*:\\s*effect\\b",
+      "rule_sections": ["602"],
+      "forced_rule_refs": ["602.1"],
+      "reason": "Questions asking how to identify activated abilities need the activated ability definition."
+    },
+    {
+      "id": "mana_abilities_stack",
+      "pattern": "\\bmana abilit(?:y|ies)\\b.*\\bstack\\b|\\bstack\\b.*\\bmana abilit(?:y|ies)\\b",
+      "rule_sections": ["605", "405"],
+      "forced_rule_refs": ["605.3b", "405.6c"],
+      "reason": "Questions about whether mana abilities use the stack need both mana ability timing and stack exceptions."
+    },
+    {
+      "id": "playing_lands_stack_response",
+      "pattern": "\\b(play(?:ing)?|played)\\s+(?:a\\s+)?land\\b|\\brespon(?:d|se)\\b.*\\bland\\b",
+      "rule_sections": ["305", "116"],
+      "forced_rule_refs": ["305.2", "116.2a"],
+      "reason": "Questions about responding to playing lands need land play timing and special action rules."
+    },
+    {
+      "id": "illegal_targets_resolution",
+      "pattern": "\\billegal target(?:s)?\\b.*\\b(resolv(?:e|es|ing|ution)|tries to resolve)\\b|\\b(resolv(?:e|es|ing|ution)|tries to resolve)\\b.*\\billegal target(?:s)?\\b",
+      "rule_sections": ["608"],
+      "forced_rule_refs": ["608.2b"],
+      "reason": "Questions about all targets becoming illegal at resolution map to resolving spells and abilities."
+    },
+    {
+      "id": "summoning_sickness",
+      "pattern": "\\bsummoning sickness\\b|\\bcame under your control\\b|\\bturn (?:it|they) (?:came|entered)\\b|\\bactivate\\b.*\\btap ability\\b",
+      "rule_sections": ["302"],
+      "forced_rule_refs": ["302.6"],
+      "reason": "Questions about attacking or tap abilities soon after control changes need the creature timing restriction."
+    },
+    {
+      "id": "copy_spell_choices_targets_modes",
+      "pattern": "\\bcopy(?:ing|ied)?\\b.*\\bspell\\b.*\\b(targets?|modes?|choices?)\\b|\\b(targets?|modes?|choices?)\\b.*\\bcopy(?:ing|ied)?\\b.*\\bspell\\b",
+      "rule_sections": ["707"],
+      "forced_rule_refs": ["707.10", "707.10c"],
+      "reason": "Questions about copied spells retaining targets, modes, or other choices need the copy-of-spell rules."
+    },
+    {
+      "id": "modal_spell_modes_chosen",
+      "pattern": "\\bmodal spell\\b|\\bmodes?\\b.*\\bchosen\\b|\\bchoos(?:e|ing|en)\\b.*\\bmodes?\\b",
+      "rule_sections": ["601"],
+      "forced_rule_refs": ["601.2b"],
+      "reason": "Questions about when spell modes are chosen need the casting spell choices step."
+    },
+    {
+      "id": "split_second",
+      "pattern": "\\bsplit second\\b",
+      "rule_sections": ["702"],
+      "forced_rule_refs": ["702.61a"],
+      "reason": "Questions using the split second keyword need its keyword rule."
+    },
+    {
+      "id": "instant_timing",
+      "pattern": "\\binstant\\b.*\\b(opponent|turn|priority|cast)\\b|\\bcast\\b.*\\binstant\\b",
+      "rule_sections": ["304", "117"],
+      "forced_rule_refs": ["304.5", "117.1a"],
+      "reason": "Questions about when instants can be cast need instant timing and priority rules."
+    },
+    {
+      "id": "double_strike_combat_damage_trigger",
+      "pattern": "\\b(double strike|deals? combat damage|combat damage)\\b.*\\b(whenever|trigger(?:s|ed)?|create[sd]?)\\b|\\b(whenever|trigger(?:s|ed)?|create[sd]?)\\b.*\\b(double strike|deals? combat damage|combat damage)\\b",
+      "rule_sections": ["603", "702"],
+      "forced_rule_refs": ["603.2", "702.4", "510.4"],
+      "reason": "This combines three official concepts: triggered abilities, double strike, and combat damage steps."
+    },
+    {
+      "id": "targeting",
+      "pattern": "\\b(can['\u2019]?t|cannot|can not)\\s+be\\s+target(?:ed)?\\b|\\bhexproof\\b|\\bshroud\\b|\\btarget(?:s|ed|ing)?\\b",
+      "rule_sections": ["115"],
+      "forced_rule_refs": ["115.1c", "115.1d", "115.10a"],
+      "reason": "Player wording about being targeted maps to the targeting definition and the rule that affected objects are not automatically targets."
+    },
+    {
+      "id": "owner_leaves_game",
+      "pattern": "\\b(leaves? the game|loses? the game)\\b.*\\b(owner|owned|control|permanent|object)\\b|\\b(owner|owned|control|permanent|object)\\b.*\\b(leaves? the game|loses? the game)\\b",
+      "rule_sections": ["104", "800"],
+      "forced_rule_refs": ["104.5", "800.4a"],
+      "reason": "Questions about owned objects after a player loses need losing/leaving-game and multiplayer object handling rules."
+    },
+    {
+      "id": "state_based_actions_and_death_triggers",
+      "pattern": "\\b(state[- ]based action|state based actions|sba|sbas|dies?|death trigger|trigger(?:s|ed)?|put on the stack|priority)\\b.*\\b(state[- ]based action|state based actions|sba|sbas|dies?|death trigger|trigger(?:s|ed)?|put on the stack|priority)\\b",
+      "rule_sections": ["117", "603", "704"],
+      "forced_rule_refs": ["117.5", "603.2", "603.3", "704.3"],
+      "reason": "Timing questions about death triggers and state-based actions need the priority loop, trigger creation, trigger stacking, and SBA timing rules."
+    }
+  ]
+}
